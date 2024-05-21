@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 
-const createTodo = (text) => {
+const createTodo = async (text) => {
   return fetch("http://localhost:8000/todo/create", {
     method: "POST",
     headers: {
@@ -18,16 +18,17 @@ const createTodo = (text) => {
 
 export default function Form() {
   const [text, setText] = useState("");
+  console.log("Text:-", text);
   const queryClient = useQueryClient();
 
   const todoMutation = useMutation(createTodo, {
-    OnSuccess: () => {
+    onSuccess: () => {
       console.log("Success");
       queryClient.invalidateQueries(["todo"]);
     },
 
     onError: (error) => {
-      console.log("Error", error);
+      console.error("Error", error);
     },
   });
 
