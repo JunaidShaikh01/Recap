@@ -4,8 +4,9 @@ const userRouter = express.Router();
 const zod = require("zod");
 const app = express();
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
-const jwt = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 console.log("JWT secret: ", JWT_SECRET);
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
@@ -56,7 +57,7 @@ userRouter.post("/signup", async (req, res) => {
 
 //signin
 
-userRouter.post("login", async (req, res) => {
+userRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const success = signinSchema.safeParse(req.body);
   if (!success) {
