@@ -30,7 +30,10 @@ export default function Signin() {
           </button>
         </Form>
         <p className="mb-4">
-          Don't have an account? <Link to="/signup">SignUp</Link>
+          Don't have an account?{" "}
+          <Link className="text-[#009578]" to="/signup">
+            SignUp
+          </Link>
         </p>
       </div>
     </div>

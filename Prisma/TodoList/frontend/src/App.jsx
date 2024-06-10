@@ -6,8 +6,8 @@ import SignupPage, { action as signupAction } from "./pages/Signuppage";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
-  { path: "/", element: <SigninPage />, Component: signinAction },
-  { path: "/signup", element: <SignupPage />, Component: signupAction },
+  { path: "/", element: <SigninPage />, action: signinAction },
+  { path: "/signup", element: <SignupPage />, action: signupAction },
   { path: "/dashboard", element: <Dashboard /> },
 ]);
 

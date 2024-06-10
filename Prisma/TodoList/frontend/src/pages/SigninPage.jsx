@@ -17,14 +17,18 @@ export const action = async ({ request }) => {
 
   try {
     const { data } = await axios.post(
-      "http://localhost:3000/api/v1/user/login",
-      authData
+      "http://localhost:3000/app/v1/user/login",
+      {
+        username: authData.username,
+        password: authData.password,
+      }
     );
 
     localStorage.clear();
     localStorage.setItem("token", data.token);
     return redirect("/dashboard");
   } catch (error) {
-    return error.response.data.mesasge;
+    console.log(error);
+    return error.response.data.message;
   }
 };

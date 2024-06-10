@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 console.log("JWT secret: ", JWT_SECRET);
 const { PrismaClient } = require("@prisma/client");
+const { authMiddleware } = require("../middleware/middleware");
 const prisma = new PrismaClient();
 
 const signupSchema = zod.object({
@@ -80,6 +81,15 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+//get Logedin user
+userRouter.get("/me", authMiddleware, async (req, res) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: req.user.id,
+    },
+  });
+  res.json({ user });
+});
 module.exports = {
   userRouter,
 };

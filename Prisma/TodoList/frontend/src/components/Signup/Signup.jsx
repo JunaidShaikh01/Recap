@@ -40,7 +40,7 @@ export default function Signup() {
           </button>
         </Form>
         <p className="mb-4">
-          Already have an account?<Link to="/">Login</Link>
+          Already have an account?<Link className="text-[#009578]" to="/">Login</Link>
         </p>
       </div>
     </div>
