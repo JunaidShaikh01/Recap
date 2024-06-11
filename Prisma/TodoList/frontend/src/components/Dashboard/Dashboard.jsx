@@ -3,12 +3,13 @@ import { Form } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faUser, faX } from "@fortawesome/free-solid-svg-icons";
 
-export default function Dashboard() {
+export default function Dashboard({ data }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const clickHandler = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   console.log("isDropdownOpen", isDropdownOpen);
+  console.log("Data", data);
   return (
     <div>
       <nav className="navbar bg-[#009578] w-screen h-[12vh] flex justify-between px-[2rem] items-center">

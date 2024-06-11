@@ -52,8 +52,8 @@ userRouter.post("/signup", async (req, res) => {
     },
   });
 
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET);
-  res.json({ user, token });
+  // const token = jwt.sign({ userId: user.id }, JWT_SECRET);
+  res.json({ user });
 });
 
 //signin
@@ -85,7 +85,7 @@ userRouter.post("/login", async (req, res) => {
 userRouter.get("/me", authMiddleware, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: req.user.id,
+      id: req.id,
     },
   });
   res.json({ user });
