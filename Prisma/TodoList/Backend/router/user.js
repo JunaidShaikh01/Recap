@@ -81,7 +81,7 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-//get Logedin user
+// get Logedin user
 userRouter.get("/me", authMiddleware, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {

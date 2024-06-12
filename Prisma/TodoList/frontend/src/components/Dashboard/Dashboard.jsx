@@ -46,7 +46,13 @@ export default function Dashboard({ data }) {
                 type="text"
                 placeholder="Enter Todo"
                 name="todo"
-                className="border w-[95%] p-4 text-xl rounded-s-lg shadow focus:outline-none focus:border-b-2 focus:border-gray-300"
+                className="border w-[47%] p-4 text-xl rounded-s-lg shadow focus:outline-none focus:border-b-2 focus:border-gray-300"
+              />
+              <input
+                type="text"
+                placeholder="Description"
+                name="description"
+                className="border w-[47%] p-4 text-xl  shadow focus:outline-none focus:border-b-2 focus:border-gray-300"
               />
               {!isDropdownOpen && (
                 <button className="bg-[#009578]  text-[#0d3a31] p-4 rounded-e-lg text-xl  shadow transform duration-500 ease-in-out hover:bg-[#b8dcd5] cursor-pointer">

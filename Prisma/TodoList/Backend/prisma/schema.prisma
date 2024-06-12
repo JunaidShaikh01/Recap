@@ -27,6 +27,6 @@ model Todo {
   title       String
   description String
   userId      Int
-  done        Boolean
+  done        Boolean @default(false)
   user        User    @relation(fields: [userId], references: [id])
 }
