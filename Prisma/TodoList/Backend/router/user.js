@@ -71,21 +71,22 @@ userRouter.post("/login", async (req, res) => {
       username: username,
     },
   });
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET);
-    res.json({ msg: "User Signin", token });
-  } else {
-    res.status(403).json({
-      msg: "Invalid Email or Password",
-    });
+  const userId = user.id;
+  console.log("User Id: ", userId);
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    return res.status(401).json({ msg: "Invalid password" });
   }
+
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET);
+  res.json({ msg: "Signin successful", token })
 });
 
 // get Logedin user
 userRouter.get("/me", authMiddleware, async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: req.id,
+      id: req.userId,
     },
   });
   res.json({ user });

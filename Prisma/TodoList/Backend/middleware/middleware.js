@@ -13,13 +13,17 @@ const authMiddleware = (req, res, next) => {
   }
 
   const token = authHeader.split(" ")[1];
+  console.log("Token", token);
+
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
+    console.log("Decoded token: ", decoded);
 
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    return res.status(404).json({
+    console.log("Error:" , error);
+    res.status(404).json({
       msg: "Invalid token",
     });
   }
