@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
   const [image, setImage] = useState(null);
   const [audio, setAudio] = useState(null);
   const [uploads, setUploads] = useState([]);
-
+  const [media, setmedia] = useState([]);
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
@@ -33,12 +33,22 @@ function App() {
     setUploads([...uploads, response.data]);
   };
 
-  const fetchUploads = async () => {
-    const response = await axios.get("http://localhost:3001/uploads");
-    setUploads(response.data);
-  };
-  console.log("fetchUploads:-", fetchUploads);
+  useEffect(() => {
+    const fetchMedia = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/uploads");
+        console.log("Fetching Media ", response.data);
+        setmedia(response.data);
+      } catch (error) {
+        console.error("Error fetchning media:-", error);
+      }
+    };
+    fetchMedia();
+  }, []);
+
+  // console.log(":-", fetchUploads);
   console.log("Uploades :- ", uploads);
+  console.log("Media :-", media);
 
   return (
     <div className="p-6">
@@ -74,27 +84,30 @@ function App() {
         </button>
       </form>
       <button
-        onClick={fetchUploads}
+        // onClick={fetchUploads}
         className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
       >
         Fetch Uploads
       </button>
       <ul className="mt-4 space-y-2">
         
-        {uploads.map((upload) => (
-          <li key={upload.id} className="border p-2">
-            <img
-              src={`http://localhost:3001/${upload.imageUrl}`}
-              alt="Uploaded"
-              className="w-32 h-32 object-cover"
-            />
-            <audio
-              controls
-              src={`http://localhost:3001/${upload.audioUrl}`}
-              className="w-full mt-2"
-            />
-          </li>
-        ))}
+        {media.length > 0 &&
+          media.map((item) => (
+            <li key={item.id}>
+              {/* <h1>{item}</h1> */}
+              <img
+                src={`http://localhost:3001/${item.imageUrl}`}
+                alt="Uploaded"
+                className="w-32 h-32 object-cover"
+              />
+              <audio
+                controls
+                src={`http://localhost:3001/${item.audioUrl}`}
+                className="w-full mt-2"
+              />
+              Your browser does not support the audio element.
+            </li>
+          ))}
       </ul>
     </div>
   );
