@@ -78,8 +78,8 @@ userRouter.post("/login", async (req, res) => {
     return res.status(401).json({ msg: "Invalid password" });
   }
 
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET);
-  res.json({ msg: "Signin successful", token })
+  const token = jwt.sign({ userId }, JWT_SECRET);
+  res.json({ msg: "Signin successful", token });
 });
 
 // get Logedin user
