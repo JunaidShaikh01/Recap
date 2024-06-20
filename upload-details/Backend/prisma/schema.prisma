@@ -10,13 +10,16 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://shaikhjunaid020801%40gmail.com:dlar45xQfUzi@ep-muddy-credit-a5c76gyc.us-east-2.aws.neon.tech/upload-file?sslmode=require"
+  url      = env("DATABASE_URL")
 }
 
-model Upload {
+model Song {
   id        Int      @id @default(autoincrement())
+  name      String
+  singer    String
+  language  String
+  category  String
   imageUrl  String
-  audioUrl  String
-  
+  songUrl   String
   createdAt DateTime @default(now())
 }
