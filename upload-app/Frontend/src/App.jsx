@@ -90,7 +90,6 @@ function App() {
         Fetch Uploads
       </button>
       <ul className="mt-4 space-y-2">
-        
         {media.length > 0 &&
           media.map((item) => (
             <li key={item.id}>
